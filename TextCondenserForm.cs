@@ -6,6 +6,7 @@ namespace TextCondensor
         public TextCondenserForm()
         {
             InitializeComponent();
+            AcceptButton = buttonCondenseText;
         }
 
         private void buttonCondenseText_Click(object sender, EventArgs e)
