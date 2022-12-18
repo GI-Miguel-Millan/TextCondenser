@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextCondensor", "TextCondensor.csproj", "{2BEEE956-DCD6-40A0-A6AE-A5025F78E3E2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TextCondenser", "TextCondenser.csproj", "{2BEEE956-DCD6-40A0-A6AE-A5025F78E3E2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
