@@ -37,37 +37,40 @@ namespace TextCondensor
         {
             List<string> condensedTextList = new List<string>();
             if (linesOfTextToCondense == null) return condensedTextList;
+
+            char[] whitespaceChars = new[] { ' ', '　' ,'\n','\r'};
             
             string shortestUniqueText = "";
             string longestUniqueText = "";
             foreach(string currentKey in linesOfTextToCondense)
             {
+                string currentCondensed = LongestUniquePhrase(currentKey).Trim(whitespaceChars);
                 if (string.IsNullOrWhiteSpace(shortestUniqueText))
                 {
-                    shortestUniqueText = currentKey;
-                    longestUniqueText = currentKey;
+                    shortestUniqueText = currentCondensed;
+                    longestUniqueText = currentCondensed;
                     continue;
                 }
 
-                if (currentKey.StartsWith(longestUniqueText) || longestUniqueText.StartsWith(currentKey))
+                if (currentCondensed.StartsWith(longestUniqueText) || longestUniqueText.StartsWith(currentCondensed))
                 {
-                    shortestUniqueText = currentKey.Length < shortestUniqueText.Length
-                        ? currentKey
+                    shortestUniqueText = currentCondensed.Length < shortestUniqueText.Length
+                        ? currentCondensed
                         : shortestUniqueText;
-                    longestUniqueText = currentKey.Length > longestUniqueText.Length
-                        ? currentKey
+                    longestUniqueText = currentCondensed.Length > longestUniqueText.Length
+                        ? currentCondensed
                         : longestUniqueText;
                     continue;
                 }
 
                 // current line of text is part of a new set
-                condensedTextList.Add(LongestUniquePhrase(longestUniqueText));
-                shortestUniqueText = currentKey;
-                longestUniqueText = currentKey;
+                condensedTextList.Add(longestUniqueText);
+                shortestUniqueText = currentCondensed;
+                longestUniqueText = currentCondensed;
             }
 
             // Account for last line of text
-            condensedTextList.Add(LongestUniquePhrase(longestUniqueText));
+            condensedTextList.Add(longestUniqueText);
 
             return condensedTextList;
         }

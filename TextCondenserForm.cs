@@ -13,7 +13,25 @@ namespace TextCondensor
         {
             TextCondenser txtCondenser = new TextCondenser();
 
-            richTextBoxOutput.Lines = txtCondenser.CondenseText(richTextBoxInput.Lines).ToArray();
+            IEnumerable<string> input = richTextBoxInput.Lines;
+
+            if (removeWhiteSpacesToolStripMenuItem.Checked)
+                input = input.Select(str => str.Replace("Å@", string.Empty).Replace(" ", string.Empty));
+
+            List<string> lines = txtCondenser.CondenseText(input);
+            
+            if (performIterativeCheckToolStripMenuItem1.Checked)
+            {
+                List<string> furtherCondensedLines = txtCondenser.CondenseText(lines);
+                while (furtherCondensedLines.Count != lines.Count)
+                {
+                    lines = furtherCondensedLines;
+                    furtherCondensedLines = txtCondenser.CondenseText(lines);
+                }
+            }
+
+            richTextBoxOutput.Lines = lines.ToArray();
+
             UpdateCharactersPerHour();
         }
 
